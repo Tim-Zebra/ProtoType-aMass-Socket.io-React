@@ -1,2 +1,2 @@
 ## References:
-* UTA Bootcamp Topic #21 MERN <br />
+* starter CSS and outline messenger code obtained from https://socket.io/get-started/chat <br />
