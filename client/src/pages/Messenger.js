@@ -1,10 +1,12 @@
 import React from 'react';
-import messagesBox from './components'
-import messagingFunction from './components'
+import MessagesBox from '../components/MessagesBox'
+import MessagingForm from '../components/MessagingForm'
 
 export default function Messenger() {
   return (
-    <messagesBox />
-    <messagingFunction />
+    <div>
+      <MessagesBox />
+      <MessagingForm />
+    </div>
   );
 }
