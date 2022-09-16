@@ -1,6 +1,10 @@
+// React
 import React from 'react';
 
-export default function MessagingFunction() {
+// Styles
+import '../styles/components/MessagingForm.css'
+
+export default function MessagingForm() {
   return (
     <div>
     <form id="form" action="">
