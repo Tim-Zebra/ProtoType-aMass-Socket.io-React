@@ -1,7 +1,8 @@
 const express = require('express');
-const path = require('path');
-// const db = require('./config/connection');
-const routes = require('./routes');
+const http = require('http');
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server);
 
 const app = express();
 const PORT = process.env.PORT || 3001;

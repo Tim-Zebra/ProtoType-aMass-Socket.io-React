@@ -6,4 +6,9 @@ router.use((req, res) => {
   res.sendFile(path.join(__dirname, '../../client/build/index.html'));
 });
 
+// Gets api routes
+router.use('/api', apiRoutes);
+
+
+
 module.exports = router;
