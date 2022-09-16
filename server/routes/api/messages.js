@@ -2,7 +2,7 @@ const router = require('express').Router();
 const {
  getMessages,
  saveMessages
-} = require('../../controllers/user-controller');
+} = require('../../controllers/messages-controller');
 
 // Routes
 // GET

@@ -2,12 +2,14 @@ const express = require('express');
 const routes = require('./routes');
 const db = require('./config/connection');
 const http = require('http');
-const server = http.createServer(app);
 const { Server } = require("socket.io");
 
+// express
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// socket.IO
+const server = http.createServer(app);
 const io = new Server(server);
 
 app.use(express.urlencoded({ extended: true }));
