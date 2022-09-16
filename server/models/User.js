@@ -1,57 +1,39 @@
-const { Schema, model } = require('mongoose');
-const bcrypt = require('bcrypt');
+import mongoose from 'mongoose'
+import bcrypt from 'bcrypt'
+const SALT_ROUNDS = 6
 
-const userSchema = new Schema({
-  username: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    match: [/.+@.+\..+/, 'Must match an email address!'],
-  },
-  password: {
-    type: String,
-    required: true,
-    minlength: 5,
-  },
-  karma: {
-    type: Number,
-    default: 100,
-  },
-  karmaPosts: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'KarmaPost',
-    },
-  ],
-  karmaHelping: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'KarmaPost',
-    },
-  ],
-});
+const userSchema = new mongoose.Schema({
+  email: { type: String, required: true, lowercase: true, unique: true },
+  password: String,
+  profile: { type: mongoose.Schema.Types.ObjectId, ref: 'Profile' },
+}, {
+  timestamps: true,
+})
 
-// set up pre-save middleware to create password
-userSchema.pre('save', async function (next) {
-  if (this.isNew || this.isModified('password')) {
-    const saltRounds = 10;
-    this.password = await bcrypt.hash(this.password, saltRounds);
+userSchema.set('toJSON', {
+  transform: function (doc, ret) {
+    delete ret.password
+    return ret
   }
+})
 
-  next();
-});
+userSchema.pre('save', function (next) {
+  const user = this
+  if (!user.isModified('password')) return next()
+  bcrypt.hash(user.password, SALT_ROUNDS)
+  .then(hash => {
+    user.password = hash
+    next()
+  })
+  .catch(err => {
+    next(err)
+  })
+})
 
-// compare the incoming password with the hashed password
-userSchema.methods.isCorrectPassword = async function (password) {
-  return bcrypt.compare(password, this.password);
-};
+userSchema.methods.comparePassword = function (tryPassword, cb) {
+  bcrypt.compare(tryPassword, this.password, cb)
+}
 
-const User = model('User', userSchema);
+const User = mongoose.model('User', userSchema)
 
-module.exports = User;
+export { User }
