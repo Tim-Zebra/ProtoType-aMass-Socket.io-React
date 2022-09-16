@@ -1,25 +1,25 @@
+// import user model
+const { Message } = require('../models');
+
 module.exports = {
   // get a single user by either their id or their username
   async getMessages({ user = null, params }, res) {
-    const foundUser = await User.findOne({
-      $or: [{ _id: user ? user._id : params.id }, { username: params.username }],
-    });
+    const foundMessages = await Message.findAll({});
 
-    if (!foundUser) {
-      return res.status(400).json({ message: 'Cannot find a user with this id!' });
+    if (!foundMessages) {
+      return res.status(400).json({ message: 'Cannot find messages' });
     }
 
-    res.json(foundUser);
+    res.json(foundMessages);
   },
-  async saveBook({ user, body }, res) {
-    console.log(user);
+  async saveMessages({ body }, res) {
     try {
-      const updatedUser = await User.findOneAndUpdate(
+      const updatedMessages = await Message.findOneAndUpdate(
         { _id: user._id },
-        { $addToSet: { savedBooks: body } },
+        { $addToSet: { savedMessages: body } },
         { new: true, runValidators: true }
       );
-      return res.json(updatedUser);
+      return res.json(updatedMessages);
     } catch (err) {
       console.log(err);
       return res.status(400).json(err);
