@@ -1,5 +1,5 @@
 // React
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Styles
 import '../styles/components/MessagingForm.css'
