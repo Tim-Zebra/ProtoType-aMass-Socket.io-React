@@ -8,13 +8,15 @@ import '../styles/pages/Messenger.css'
 
 export default function Messenger() {
   // set variables
-  const [messagesData, setMessagesData] = useState([]);
+  const [messagesData, setMessagesData] = useState(['test','test2','test3']);
   const [newMessage, setNewMessage] = useState('');
   const handleFormSubmit = (e) => {
     e.preventDefault();
     console.log('message: ', newMessage);
-    setMessagesData([...messagesData, newMessage ]);
+    console.log('Messages Data Pre add: ', messagesData);
+    setMessagesData([...messagesData, newMessage]);
     setNewMessage('');
+    console.log('Messages Data Post add: ', messagesData);
   };
 
   return (
