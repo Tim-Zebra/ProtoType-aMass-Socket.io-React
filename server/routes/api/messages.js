@@ -14,7 +14,7 @@ const router = require('express').Router();
 // testing twilio function
 
 router.get("/", function(req, res, next) {
-  console.log('API is working properly');
+  res.send('API is working properly');
 });
 
 module.exports = router;
