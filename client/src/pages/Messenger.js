@@ -19,7 +19,7 @@ export default function Messenger() {
   return (
     <div>
       <MessagesBox messagesData={messagesData} />
-      <MessagingForm newMessage={newMessage} setNewMessage={setNewMessage} handleFormSubmit={handleFormSubmit}/>
+      <MessagingForm newMessage={newMessage} setNewMessage={setNewMessage} handleFormSubmit={handleFormSubmit} />
     </div>
   );
 }
