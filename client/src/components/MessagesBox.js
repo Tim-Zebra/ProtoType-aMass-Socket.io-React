@@ -7,15 +7,16 @@ import '../styles/components/MessagesBox.css'
 export default function MessagesBox(messagesData) {
   // functions
   const printAllMessages = (messages) => {
+    const printMessage = (message) => {
+      return (
+        <li>
+          {message}
+        </li>
+      )
+    }
     for(let k = 0; k < messages.length; k++) {
       let message = messages[k];
-      const printMessage = (message) => {
-        return (
-          <li>
-            {message}
-          </li>
-        )
-      }
+      printMessage(message);
     }
   };
   return (

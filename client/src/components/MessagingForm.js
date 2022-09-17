@@ -4,12 +4,11 @@ import React, { useState, useEffect } from 'react';
 // Styles
 import '../styles/components/MessagingForm.css'
 
-export default function MessagingForm() {
+export default function MessagingForm({ handleFormSubmit }) {
   return (
-    <div>
-      <form id="form" action="">
-          <input id="input" autocomplete="off" /><button>Send</button>
+      <form id="form" action="" onSubmit={handleFormSubmit}>
+          <input id="input" autoComplete="off" />
+          <button>Send</button>
       </form>
-    </div>
   );
 }

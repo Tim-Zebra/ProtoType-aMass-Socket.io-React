@@ -8,17 +8,20 @@ import '../styles/pages/Messenger.css'
 
 export default function Messenger() {
   // set variables
-  const [MessagesData, setMessagesData] = useState([]);
+  const [messagesData, setMessagesData] = useState([]);
 
   const handleFormSubmit = (event) => {
-    const { name, value } = event.target;
-    setMessagesData({ ...MessagesData, [name]: value });
+    event.preventDefault();
+    event.stopPropagation();
+    console.log('event', event);
+    const { input } = event.target;
+    setMessagesData([...messagesData, input ]);
   };
 
   return (
     <div>
-      <MessagesBox messagesData={MessagesData} />
-      <MessagingForm onSubmit={handleFormSubmit}/>
+      <MessagesBox messagesData={messagesData} />
+      <MessagingForm handleFormSubmit={handleFormSubmit}/>
     </div>
   );
 }
