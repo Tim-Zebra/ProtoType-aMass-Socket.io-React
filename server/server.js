@@ -9,10 +9,6 @@ const { Server } = require("socket.io");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// socket.IO
-const server = http.createServer(app);
-const io = new Server(server);
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -27,6 +23,10 @@ app.get('/', (req, res) => {
 });
 
 app.use(routes);
+
+// socket.IO
+const server = http.createServer(app);
+const io = new Server(server);
 
 io.on('connection', (socket) => {
   console.log('a user connected');
