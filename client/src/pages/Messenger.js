@@ -12,11 +12,8 @@ export default function Messenger() {
   const [newMessage, setNewMessage] = useState('');
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log('message: ', newMessage);
-    console.log('Messages Data Pre add: ', messagesData);
     setMessagesData([...messagesData, newMessage]);
     setNewMessage('');
-    console.log('Messages Data Post add: ', messagesData);
   };
 
   return (
