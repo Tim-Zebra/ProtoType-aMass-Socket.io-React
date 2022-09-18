@@ -55,7 +55,7 @@ io.on('connection', (socket) => {
     // twilio messaging
     client.messages
     .create({
-      body: message,
+      body: "\n\n" + message,
       from: phoneNumberTwilio,
       to: phoneNumberUser
     })
