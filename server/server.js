@@ -64,6 +64,10 @@ io.on('connection', (socket) => {
   })
 });
 
+app.post('/sms', (req, res) => {
+  console.log('This happened', req.body.Body);
+});
+
 // import message from Twilio and export to Client
 client.messages('MMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
     .fetch()
