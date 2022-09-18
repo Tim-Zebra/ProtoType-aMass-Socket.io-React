@@ -3,25 +3,21 @@ import React, { useState, useEffect } from 'react';
 import MessagesBox from '../components/MessagesBox'
 import MessagingForm from '../components/MessagingForm'
 
-// socket imports
-import io from 'socket.io-client';
-
 // Styles
 import '../styles/pages/Messenger.css'
 
-// socket variables
-const socket = io();
-
-export default function Messenger() {
+export default function Messenger({ socket }) {
   // set variables
   const [messagesData, setMessagesData] = useState([]);
   const [newMessage, setNewMessage] = useState('');
 
-  // Receive message from server and addes to messages
-  socket.on('messenger', (message) => {
-    console.log('Message from Server: ', message);
-    setMessagesData([...messagesData, message]);});
 
+  useEffect(() => {
+    // Receive message from server and addes to messages
+    socket.on('messenger', (message) => {
+      console.log('Message from Server: ', message);
+      setMessagesData([...messagesData, message]);});
+  }, []);
   // helper functions
   // send new message to server
   const sendNewMessageToServer = () => {
