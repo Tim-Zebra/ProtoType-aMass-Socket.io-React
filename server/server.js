@@ -64,17 +64,26 @@ io.on('connection', (socket) => {
   })
 });
 
-app.post('/sms', (req, res) => {
-  console.log('This happened', req.body.Body);
-});
+// import message from Twilio and export to Client
+// client.messages('MMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+//     .fetch()
+//     .then(message => {
+//       // socket.emit("messenger", message);
+//       console.log("message: ", message);
+//       console.log(message.to);
+// });
 
 // import message from Twilio and export to Client
-client.messages('MMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
-    .fetch()
-    .then(message => {
-      // socket.emit("messenger", message);
-      console.log("message: ", message);
-      console.log(message.to);
+app.post('/sms', (req, res) => {
+  let message = req.body.Body;
+  console.log('Message from Text: ', message);
+
+  // socket
+  io.on('connection', (socket) => {
+    // Messenger sockets
+    // import message from Client export to Twilio
+    socket.emit("messenger", message);
+  });
 });
 
 server.listen(3001, () => {
