@@ -11,6 +11,7 @@ const { Server } = require("socket.io");
 // const { SocketAddress } = require('net');
 // twilio
 const { MessagingResponse } = require('twilio').twiml;
+// twilio client
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const phoneNumberTwilio = process.env.TWILIO_PHONE_NUMBER;
@@ -61,8 +62,15 @@ io.on('connection', (socket) => {
     })
     .then(message => console.log(message.sid));
   })
-  // import message from Twilio and export to Client
-  socket.emit("messenger", "Just what do you think you are doing, dave." )
+});
+
+// import message from Twilio and export to Client
+client.messages('MMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+    .fetch()
+    .then(message => {
+      // socket.emit("messenger", message);
+      console.log("message: ", message);
+      console.log(message.to);
 });
 
 server.listen(3001, () => {
