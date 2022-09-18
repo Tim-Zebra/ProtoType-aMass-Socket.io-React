@@ -22,7 +22,7 @@ export default function Messenger() {
     console.log('Message from Server: ', message);
     setMessagesData([...messagesData, message]);});
 
-  // helping functions
+  // helper functions
   // send new message to server
   const sendNewMessageToServer = () => {
     socket.emit('messenger', newMessage);
