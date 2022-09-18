@@ -2,6 +2,7 @@
 const express = require('express');
 const routes = require('./routes');
 const path = require('path');
+require('dotenv').config();
 // database
 const db = require('./config/connection');
 // socket.io set up
