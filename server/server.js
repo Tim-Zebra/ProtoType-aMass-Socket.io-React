@@ -35,8 +35,9 @@ io.on('connection', (socket) => {
   socket.on("messenger", (message) => {
     console.log("Message from React: ", message);
   })
-  // socket.emit("messenger", "hello ")
+  // socket.emit("messenger", "Message from Server: " )
 });
+
 
 server.listen(3001, () => {
   console.log('listening on localhost:3001');
@@ -45,4 +46,21 @@ server.listen(3001, () => {
 // db.once('open', () => {
 //   app.listen(PORT, () => console.log(`🌍 Now listening on localhost:${PORT}`));
 // });
+
+//  Initializes app
+function init() {
+  // This will begin the prompts for user input
+  inquirer
+      .prompt("Send message to React")
+      .then(response => {
+        let message = response;
+        io.on("connection", (socket) => {
+          socket.emit("messenger", message)
+        })
+          // This will send the data to the file to write a README.
+      });
+}
+
+// Function call to initialize app
+init();
 
