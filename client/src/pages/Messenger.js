@@ -3,8 +3,14 @@ import React, { useState, useEffect } from 'react';
 import MessagesBox from '../components/MessagesBox'
 import MessagingForm from '../components/MessagingForm'
 
+// socket imports
+import io from 'socket.io-client';
+
 // Styles
 import '../styles/pages/Messenger.css'
+
+// socket variables
+const socket = io();
 
 export default function Messenger() {
   // set variables
@@ -14,12 +20,14 @@ export default function Messenger() {
   // helping functions
   // send new message to server
   const sendNewMessageToServer = () => {
-    
+    console.log('This happened');
+    socket.emit('messenger', newMessage);
   }
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
     setMessagesData([...messagesData, newMessage]);
+    sendNewMessageToServer();
     setNewMessage('');
   };
 

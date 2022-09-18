@@ -4,6 +4,7 @@ const path = require('path');
 const db = require('./config/connection');
 const http = require('http');
 const { Server } = require("socket.io");
+const { SocketAddress } = require('net');
 
 // express
 const app = express();
@@ -30,6 +31,11 @@ const io = new Server(server);
 
 io.on('connection', (socket) => {
   console.log('a user connected');
+  // messenger socket
+  socket.on("messenger", (message) => {
+    console.log("Message from React: ", message);
+  })
+  // socket.emit("messenger", "hello ")
 });
 
 server.listen(3001, () => {
