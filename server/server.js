@@ -65,28 +65,10 @@ io.on('connection', (socket) => {
 });
 
 // import message from Twilio and export to Client
-// client.messages('MMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
-//     .fetch()
-//     .then(message => {
-//       // socket.emit("messenger", message);
-//       console.log("message: ", message);
-//       console.log(message.to);
-// });
-
-// import message from Twilio and export to Client
 app.post('/sms', (req, res) => {
   let message = req.body.Body;
   console.log('Message from Text: ', message);
-
-  // socket
-  io.on('connection', (socket) => {
-    // Messenger sockets
-    // import message from Client export to Twilio
-    socket.emit("messenger", message);
-  });
-
-  res.writeHead(200, {'Content-Type': 'text/xml'});
-  res.end(twiml.toString());
+  io.emit("messenger", message);
 });
 
 server.listen(3001, () => {

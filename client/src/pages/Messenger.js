@@ -11,13 +11,8 @@ export default function Messenger({ socket }) {
   const [messagesData, setMessagesData] = useState([]);
   const [newMessage, setNewMessage] = useState('');
 
+  socket.on('messenger', (message) => setMessagesData([...messagesData, message]));
 
-  useEffect(() => {
-    // Receive message from server and addes to messages
-    socket.on('messenger', (message) => {
-      console.log('Message from Server: ', message);
-      setMessagesData([...messagesData, message]);});
-  }, []);
   // helper functions
   // send new message to server
   const sendNewMessageToServer = () => {

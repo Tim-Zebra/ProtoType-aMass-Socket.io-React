@@ -27,7 +27,7 @@ function App() {
   return (
     <div>
       <p>Connected: { '' + isConnected }</p>
-      <Messenger />
+      <Messenger socket={socket}/>
     </div>
 
   );
