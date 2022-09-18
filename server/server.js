@@ -52,19 +52,18 @@ io.on('connection', (socket) => {
   // import message from Client export to Twilio
   socket.on("messenger", (message) => {
     console.log("Message from React: ", message);
+    // twilio messaging
+    client.messages
+    .create({
+      body: message,
+      from: phoneNumberTwilio,
+      to: phoneNumberUser
+    })
+    .then(message => console.log(message.sid));
   })
   // import message from Twilio and export to Client
   socket.emit("messenger", "Just what do you think you are doing, dave." )
 });
-
-// twilio messaging
-client.messages
-      .create({
-         body: 'This will be the body of the new message!',
-         from: phoneNumberTwilio,
-         to: phoneNumberUser
-       })
-      .then(message => console.log(message.sid));
 
 server.listen(3001, () => {
   console.log('listening on localhost:3001');
