@@ -34,8 +34,8 @@ function App() {
   }
   return (
     <div>
-      <Messenger />
       <p>Connected: { '' + isConnected }</p>
+      <Messenger />
     </div>
 
   );

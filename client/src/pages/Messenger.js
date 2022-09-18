@@ -14,8 +14,14 @@ const socket = io();
 
 export default function Messenger() {
   // set variables
-  const [messagesData, setMessagesData] = useState(['test','test2','test3']);
+  const [messagesData, setMessagesData] = useState([]);
   const [newMessage, setNewMessage] = useState('');
+
+
+  // Receive message from server and addes to messages
+  socket.on('messenger', (message) => {
+    console.log('Message from Server: ', message);
+    setMessagesData([...messagesData, message]);});
 
   // helping functions
   // send new message to server
@@ -24,14 +30,13 @@ export default function Messenger() {
     socket.emit('messenger', newMessage);
   }
 
+  // handles message submit
   const handleFormSubmit = (e) => {
     e.preventDefault();
     setMessagesData([...messagesData, newMessage]);
     sendNewMessageToServer();
     setNewMessage('');
   };
-
-
 
   // contact back end and send updated message
   return (
