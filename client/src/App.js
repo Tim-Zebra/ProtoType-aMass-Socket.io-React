@@ -18,20 +18,12 @@ function App() {
       setIsConnected(false);
     });
 
-    socket.on('pong', () => {
-      setLastPong(new Date().toISOString());
-    });
-
     return () => {
       socket.off('connect');
       socket.off('disconnect');
-      socket.off('pong');
     };
   }, []);
 
-  const sendPing = () => {
-    socket.emit('ping');
-  }
   return (
     <div>
       <p>Connected: { '' + isConnected }</p>

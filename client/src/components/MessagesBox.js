@@ -8,7 +8,7 @@ export default function MessagesBox({ messagesData }) {
   return (
     <div>
       <ul id="messages">
-        {messagesData.map((message) => <li>{message}</li>)}
+        {messagesData.map((message, index) => <li key={index}>{message}</li>)}
       </ul>
     </div>
   );
