@@ -20,8 +20,8 @@ export default function Messenger({ socket }) {
   const [newMessage, setNewMessage] = useState(defaultNewMessage);
   // user
   const userData = {
-    userName: "Dave",
-    userId: "007",
+    userName: "Hal",
+    userId: "1337",
   }
 
   // sockets
@@ -50,7 +50,7 @@ export default function Messenger({ socket }) {
   const processNewMessage = () => {
     newMessage.userName = userData.userName;
     newMessage.userId = userData.userId;
-    newMessage.date = Date().toString();
+    newMessage.date = "Quantum Void";
   } 
   // handles message submit
   const handleFormSubmit = (e) => {
