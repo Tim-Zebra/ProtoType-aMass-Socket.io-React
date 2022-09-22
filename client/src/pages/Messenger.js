@@ -38,7 +38,7 @@ export default function Messenger({ socket }) {
 
   // send new message to server to POST to Client Web Chat
   const sendNewAppOnlyMessageToServer = () => {
-    socket.emit('messengerClient', newMessage.body);
+    socket.emit('messengerClient', newMessage);
   }
   
   // process message object
@@ -53,7 +53,7 @@ export default function Messenger({ socket }) {
     processNewMessage();
     setMessagesData([...messagesData, newMessage]);
     // sendNewSMSMessageToServer();
-    // sendNewAppOnlyMessageToServer();
+    sendNewAppOnlyMessageToServer();
     setNewMessage(defaultNewMessage);
   };
 
