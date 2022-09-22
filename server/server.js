@@ -10,17 +10,16 @@ const http = require('http');
 const { Server } = require("socket.io");
 // const { SocketAddress } = require('net');
 // twilio
-const { MessagingResponse } = require('twilio').twiml;
 // twilio client
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
-const phoneNumberTwilio = process.env.TWILIO_PHONE_NUMBER;
-const phoneNumberUser = process.env.USER_PHONE_NUMBER;
-const client = require('twilio')(accountSid, authToken);
+// const accountSid = process.env.TWILIO_ACCOUNT_SID;
+// const authToken = process.env.TWILIO_AUTH_TOKEN;
+// const phoneNumberTwilio = process.env.TWILIO_PHONE_NUMBER;
+// const phoneNumberUser = process.env.USER_PHONE_NUMBER;
+// const client = require('twilio')(accountSid, authToken);
 
 // express
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -60,31 +59,31 @@ io.on('connection', (socket) => {
 
   // Web App to Twilio, Twilio to Web App
   // import message from Client, export to Twilio
-  socket.on("messengerSMS", (message) => {
-    console.log("Message from React: ", message);
-    // message to Twilio
-    client.messages
-    .create({
-      body: "\n\n" + message,
-      from: phoneNumberTwilio,
-      to: phoneNumberUser
-    })
-    .then(message => console.log(message.sid));
-  })
+  // socket.on("messengerSMS", (message) => {
+  //   console.log("Message from React: ", message);
+  //   // message to Twilio
+  //   client.messages
+  //   .create({
+  //     body: "\n\n" + message,
+  //     from: phoneNumberTwilio,
+  //     to: phoneNumberUser
+  //   })
+  //   .then(message => console.log(message.sid));
+  // })
 });
 
 // Messenger sockets - Export to Web App
 // import message from Twilio, and export to Client
-app.post('/sms', (req, res) => {
-  console.log('Object from Twilio: ', req.body);
-  let message = req.body.Body;
-  console.log('Message from Text: ', message);
-  io.emit("messengerSMS", message);
-});
+// app.post('/sms', (req, res) => {
+//   console.log('Object from Twilio: ', req.body);
+//   let message = req.body.Body;
+//   console.log('Message from Text: ', message);
+//   io.emit("messengerSMS", message);
+// });
 
 // Opens server without database
-server.listen(3001, () => {
-  console.log('listening on localhost:3001');
+server.listen(PORT, () => {
+  console.log(`listening on localhost:${PORT}`);
 });
 
 // opens DB and server
