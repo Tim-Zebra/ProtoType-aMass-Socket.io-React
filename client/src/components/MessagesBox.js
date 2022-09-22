@@ -4,7 +4,8 @@ import React, { useState, useEffect } from 'react';
 // Styles
 import '../styles/components/MessagesBox.css'
 
-export default function MessagesBox({ messagesData }) {
+export default function MessagesBox({ userData, messagesData }) {
+  console.log('thisHappened');
   return (
     <div>
       <ul id="messages">

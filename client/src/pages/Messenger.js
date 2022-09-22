@@ -28,7 +28,9 @@ export default function Messenger({ socket }) {
   // // SMS listener - Twilio
   // socket.on('messengerSMS', (message) => setMessagesData([...messagesData, message]));
   // App Only Listener - Server
-  socket.on('messengerClient', (message) => setMessagesData([...messagesData, message]));
+  socket.on('messengerClient', (message) => {
+    setMessagesData([...messagesData, message]);
+  });
 
   // helper functions
   // send new message to server to POST to Twilio SMS
