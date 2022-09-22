@@ -17,10 +17,7 @@
   width: 50%;
 }
 
-#messages > li:nth-child(odd) { 
-  background: #efefef; 
-}
-
 #nonUserMessages {
   align-self: end;
+  background: #efefef; 
 } 
