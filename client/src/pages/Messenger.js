@@ -8,9 +8,16 @@ import '../styles/pages/Messenger.css'
 
 export default function Messenger({ socket }) {
   // set variables
+  // messages
   const [messagesData, setMessagesData] = useState([]);
-  const [newMessage, setNewMessage] = useState('');
+  const [newMessage, setNewMessage] = useState({});
+  // user
+  const userData = {
+    name: "Dave",
+    id: "007",
+  }
 
+  // 
   socket.on('messengerSMS', (message) => setMessagesData([...messagesData, message]));
 
   // helper functions
@@ -30,7 +37,7 @@ export default function Messenger({ socket }) {
   // contact back end and send updated message
   return (
     <div>
-      <MessagesBox messagesData={messagesData} />
+      <MessagesBox messagesData={messagesData} userData={userData} />
       <MessagingForm newMessage={newMessage} setNewMessage={setNewMessage} handleFormSubmit={handleFormSubmit} />
     </div>
   );

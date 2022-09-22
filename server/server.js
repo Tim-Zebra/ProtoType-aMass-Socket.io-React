@@ -73,7 +73,6 @@ io.on('connection', (socket) => {
   })
 });
 
-
 // Messenger sockets - Export to Web App
 // import message from Twilio, and export to Client
 app.post('/sms', (req, res) => {
