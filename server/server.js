@@ -66,15 +66,18 @@ io.on('connection', (socket) => {
 
 // import message from Twilio and export to Client
 app.post('/sms', (req, res) => {
+  console.log('Object from Twilio: ', req.body);
   let message = req.body.Body;
   console.log('Message from Text: ', message);
   io.emit("messenger", message);
 });
 
-server.listen(3001, () => {
-  console.log('listening on localhost:3001');
-});
-
-// db.once('open', () => {
-//   app.listen(PORT, () => console.log(`🌍 Now listening on localhost:${PORT}`));
+// Opens server without database
+// server.listen(3001, () => {
+//   console.log('listening on localhost:3001');
 // });
+
+// opens DB and server
+db.once('open', () => {
+  server.listen(PORT, () => console.log(`🌍 Now listening on localhost:${PORT}`));
+});

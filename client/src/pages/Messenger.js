@@ -11,7 +11,7 @@ export default function Messenger({ socket }) {
   const [messagesData, setMessagesData] = useState([]);
   const [newMessage, setNewMessage] = useState('');
 
-  socket.on('messenger', (message) => setMessagesData([...messagesData, message]));
+  socket.on('messengerSMS', (message) => setMessagesData([...messagesData, message]));
 
   // helper functions
   // send new message to server
