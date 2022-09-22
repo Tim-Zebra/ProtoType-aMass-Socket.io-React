@@ -20,7 +20,7 @@ const client = require('twilio')(accountSid, authToken);
 
 // express
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -50,8 +50,10 @@ io.on('connection', (socket) => {
   });
 
   // Messenger sockets
+  // import message
+
   // import message from Client export to Twilio
-  socket.on("messenger", (message) => {
+  socket.on("messengerSMS", (message) => {
     console.log("Message from React: ", message);
     // twilio messaging
     client.messages
@@ -69,7 +71,7 @@ app.post('/sms', (req, res) => {
   console.log('Object from Twilio: ', req.body);
   let message = req.body.Body;
   console.log('Message from Text: ', message);
-  io.emit("messenger", message);
+  io.emit("messengerSMS", message);
 });
 
 // Opens server without database
