@@ -49,13 +49,20 @@ io.on('connection', (socket) => {
     console.log('user disconnected');
   });
 
-  // Messenger sockets
-  // import message
+  // Messenger sockets - Import from Web App (Listen for Web App)
+  // Web App to Web App
+  // import message from a Client
+  socket.on("messengerClient", (message) => {
+    console.log("Message from React: ", message);
+    // Export message to a Client
+    io.emit("messengerClient", message);
+  })
 
-  // import message from Client export to Twilio
+  // Web App to Twilio, Twilio to Web App
+  // import message from Client, export to Twilio
   socket.on("messengerSMS", (message) => {
     console.log("Message from React: ", message);
-    // twilio messaging
+    // message to Twilio
     client.messages
     .create({
       body: "\n\n" + message,
@@ -66,7 +73,9 @@ io.on('connection', (socket) => {
   })
 });
 
-// import message from Twilio and export to Client
+
+// Messenger sockets - Export to Web App
+// import message from Twilio, and export to Client
 app.post('/sms', (req, res) => {
   console.log('Object from Twilio: ', req.body);
   let message = req.body.Body;
@@ -75,11 +84,11 @@ app.post('/sms', (req, res) => {
 });
 
 // Opens server without database
-// server.listen(3001, () => {
-//   console.log('listening on localhost:3001');
-// });
+server.listen(3001, () => {
+  console.log('listening on localhost:3001');
+});
 
 // opens DB and server
-db.once('open', () => {
-  server.listen(PORT, () => console.log(`🌍 Now listening on localhost:${PORT}`));
-});
+// db.once('open', () => {
+//   server.listen(PORT, () => console.log(`🌍 Now listening on localhost:${PORT}`));
+// });
