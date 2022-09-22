@@ -5,19 +5,22 @@ import React, { useState, useEffect } from 'react';
 import '../styles/components/MessagesBox.css'
 
 export default function MessagesBox({ userData, messagesData }) {
-  console.log('thisHappened');
+  console.log('thisHappened', messagesData);
   return (
     <div>
       <ul id="messages">
         {messagesData.map((message, index) => {
+          console.log('in div', message);
           let body = message.body;
           let userName = message.userName;
           let date = message.date;
-        <li key={index}>{body}
-          <p>
-            Posted by: {userName} on: {date}
-          </p>
-        </li>
+        return (
+          <li key={index}>{body}
+            <p>
+              Posted by: {userName} on: {date}
+            </p>
+          </li>
+        );
         })}
       </ul>
     </div>
