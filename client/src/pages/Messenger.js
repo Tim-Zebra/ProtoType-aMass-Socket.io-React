@@ -17,21 +17,29 @@ export default function Messenger({ socket }) {
     id: "007",
   }
 
-  // 
-  socket.on('messengerSMS', (message) => setMessagesData([...messagesData, message]));
+  // sockets
+  // // SMS listener - Twilio
+  // socket.on('messengerSMS', (message) => setMessagesData([...messagesData, message]));
+  // App Only Listener - Server
+  socket.on('messengerClient', (message) => setMessagesData([...messagesData, message]));
 
   // helper functions
   // send new message to server
-  const sendNewMessageToServer = () => {
-    socket.emit('messenger', newMessage);
+  const sendNewSMSMessageToServer = () => {
+    socket.emit('messengerSMS', newMessage.text);
+  }
+
+  const sendNewAppOnlyMessageToServer = () => {
+    socket.emit('messengerClient', newMessage.text);
   }
 
   // handles message submit
   const handleFormSubmit = (e) => {
     e.preventDefault();
     setMessagesData([...messagesData, newMessage]);
-    sendNewMessageToServer();
-    setNewMessage('');
+    // sendNewSMSMessageToServer();
+    sendNewAppOnlyMessageToServer();
+    setNewMessage({});
   };
 
   // contact back end and send updated message
