@@ -17,7 +17,11 @@
   width: 50%;
 }
 
-#nonUserMessages {
+#userMessage {
   align-self: end;
+}
+
+#nonUserMessages {
+  align-self: start;
   background: #efefef; 
 } 
